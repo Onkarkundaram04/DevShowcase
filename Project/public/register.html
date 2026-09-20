@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join DevShowcase — Create an Account</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </span>
+            <span>Dev<span class="brand-gradient-text">Showcase</span></span>
+        </a>
+        <a href="explore.html" class="nav-link">← Back to Explore</a>
+    </nav>
+
+    <!-- Auth Card -->
+    <main class="container-auth">
+        <div class="card">
+            <div style="text-align: center; margin-bottom: 24px;">
+                <h1 class="card-title" style="font-size: 1.6rem;">Join DevShowcase</h1>
+                <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 4px;">Share your side-projects, open-source repos, and AI builds.</p>
+            </div>
+            
+            <form id="register-form">
+                <div class="form-group">
+                    <label for="register-name">Developer Name / Handle</label>
+                    <input type="text" id="register-name" placeholder="alex_creator" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-email">Email Address</label>
+                    <input type="email" id="register-email" placeholder="alex@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="register-password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="register-password" placeholder="••••••••" minlength="8" required>
+                        <button type="button" class="toggle-password-btn" data-target="register-password" aria-label="Show password">
+                            <svg viewBox="0 0 24 24"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                        </button>
+                    </div>
+                    <small class="form-hint">At least 8 characters with uppercase, lowercase, number, and symbol.</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">Create Developer Account</button>
+            </form>
+
+            <div class="auth-footer">
+                Already have an account? <a href="login.html">Sign in</a>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/register.js"></script>
+</body>
+</html>

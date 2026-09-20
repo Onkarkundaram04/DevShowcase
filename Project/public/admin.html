@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — DevShowcase</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand">
+            <span class="brand-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                    <polyline points="2 17 12 22 22 17"></polyline>
+                    <polyline points="2 12 12 17 22 12"></polyline>
+                </svg>
+            </span>
+            <span>Dev<span class="brand-gradient-text">Showcase</span></span>
+            <span class="badge badge-admin">Admin</span>
+        </a>
+        <ul class="nav-links">
+            <li><a href="index.html" class="nav-link">Home</a></li>
+            <li><a href="explore.html" class="nav-link">Explore</a></li>
+            <li><a href="admin.html" class="nav-link active">Admin Panel</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="container">
+        
+        <header style="margin-bottom: 24px;">
+            <h1 style="font-size: 1.8rem; font-weight: 800; color: var(--text-main);">Platform Administration</h1>
+            <p style="color: var(--text-muted);">Manage platform developers, moderate project showcases, and perform system maintenance.</p>
+        </header>
+
+        <!-- Moderate Single Project Card -->
+        <section class="card">
+            <h2 class="card-title" style="margin-bottom: 16px;">Delete Project Showcase</h2>
+            <form id="admin-delete-post-form">
+                <div class="form-group">
+                    <label for="admin-post-id">Project ID</label>
+                    <input type="text" id="admin-post-id" placeholder="Enter project ID to delete" required>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete Project</button>
+            </form>
+        </section>
+
+        <!-- Update Any Project Card -->
+        <section class="card">
+            <h2 class="card-title" style="margin-bottom: 16px;">Update Any Project Showcase</h2>
+            <form id="admin-update-post-form">
+                <div class="form-group">
+                    <label for="admin-update-post-id">Project ID</label>
+                    <input type="text" id="admin-update-post-id" placeholder="Enter project ID to update" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-update-post-title">New Title</label>
+                    <input type="text" id="admin-update-post-title" placeholder="Enter new project title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="admin-update-post-content">New Content & Links</label>
+                    <textarea id="admin-update-post-content" placeholder="Enter updated project content and URLs" required></textarea>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+            </form>
+        </section>
+
+        <!-- Manage User Card -->
+        <section class="card">
+            <h2 class="card-title" style="margin-bottom: 16px;">Manage User Account</h2>
+            <form id="admin-delete-user-form">
+                <div class="form-group">
+                    <label for="admin-user-id">User ID</label>
+                    <input type="text" id="admin-user-id" placeholder="Enter user ID to delete" required>
+                </div>
+                <button type="submit" class="btn btn-danger">Delete User & All Showcases</button>
+            </form>
+        </section>
+
+        <!-- Bulk Maintenance Operations Card -->
+        <section class="card" style="border-color: rgba(244, 63, 94, 0.3);">
+            <h2 class="card-title" style="color: var(--accent-rose); margin-bottom: 8px;">Bulk Maintenance Operations</h2>
+            <p style="margin-bottom: 16px; color: var(--text-muted);">Warning: These actions are destructive and cannot be undone.</p>
+            
+            <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+                <button type="button" id="delete-all-users-btn" class="btn btn-danger">Delete All Normal Users</button>
+                <button type="button" id="delete-all-posts-btn" class="btn btn-danger">Delete All Project Showcases</button>
+            </div>
+        </section>
+
+        <!-- All Users Card -->
+        <section class="card">
+            <div class="card-header">
+                <h2 class="card-title">Registered Developers</h2>
+                <button type="button" id="refresh-users-btn" class="btn btn-secondary" style="font-size: 0.85rem; padding: 6px 14px;">Refresh List</button>
+            </div>
+            <div id="admin-users-container" class="user-list">
+                <p style="color: var(--text-muted);">Loading users...</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="js/app.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

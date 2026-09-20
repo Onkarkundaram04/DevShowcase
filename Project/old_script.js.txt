@@ -1,0 +1,213 @@
+const post_container = document.getElementById('post-container');
+
+const create_post_form = document.getElementById('create-post-form');
+
+const search_btn = document.getElementById('search-btn');
+
+async function fetch_all_posts() {
+
+    const response = await fetch('/api/posts/get-all-posts');
+
+    const data = await response.json();
+
+    post_container.textContent = '';
+
+    for (let post of data.post_data) {
+        const card = document.createElement('div');
+
+        const title = document.createElement('h3');
+
+        title.textContent = post.title;
+
+        const content = document.createElement('p');
+
+        content.textContent = post.content;
+
+        const edit_btn = document.createElement('button');
+        edit_btn.className = 'btn edit-btn';
+        edit_btn.textContent = 'Edit';
+        edit_btn.dataset.id = post._id;
+        edit_btn.dataset.title = post.title;
+        edit_btn.dataset.content = post.content;
+
+        const delete_btn = document.createElement('button');
+        delete_btn.className = 'btn delete-btn';
+        delete_btn.textContent = 'Delete';
+        delete_btn.dataset.id = post._id;
+
+        const actions = document.createElement('div');
+        actions.className = 'card-actions';
+        actions.appendChild(edit_btn);
+        actions.appendChild(delete_btn);
+
+        card.appendChild(title);
+        card.appendChild(content);
+        card.appendChild(actions);
+
+
+        post_container.appendChild(card);
+
+    }
+}
+
+fetch_all_posts();
+
+async function create_post(event) {
+
+    event.preventDefault();     // Stop page from refreshing on form submit
+
+    const title_value = document.getElementById('post-title').value;
+
+    const content_value = document.getElementById('post-content').value;
+
+    // Send data to backend API
+
+    const response = await fetch('/api/posts/create-post', {
+        method: 'POST',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+            title: title_value,
+            content: content_value
+        })
+
+    });
+
+    if (response.ok) {
+
+        document.getElementById('post-title').value = '';
+        document.getElementById('post-content').value = '';
+
+        fetch_all_posts();
+
+    }
+}
+
+create_post_form.addEventListener('submit', create_post);
+
+
+post_container.addEventListener('click', function (event) {
+
+    const id = event.target.dataset.id;
+
+    if (!id) {
+
+        return;
+    }
+
+    if (event.target.textContent === 'Delete') {
+        delete_post(id);
+    }
+    else if (event.target.textContent === 'Edit') {
+        edit_post(id, event.target.dataset.title, event.target.dataset.content);
+    }
+});
+
+async function delete_post(id) {
+
+    const response = await fetch(`/api/posts/delete-post/${id}`, {
+        method: 'DELETE'
+    });
+
+    if (response.ok) {
+        fetch_all_posts();
+    }
+    else {
+        const data = await response.json();
+
+        alert(data.message);
+    }
+}
+
+async function edit_post(id, title, content) {
+
+    const new_title = prompt('Enter new Title : ', title);
+    const new_content = prompt('Enter new Content : ', content);
+
+    const response = await fetch(`/api/posts/update-post/${id}`, {
+        method: 'PATCH',
+
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            title: new_title,
+            content: new_content
+        })
+    });
+
+    if (response.ok) {
+        fetch_all_posts();
+    }
+    else {
+        const data = await response.json();
+
+        alert(data.message);
+    }
+}
+
+search_btn.addEventListener('click', async function () {
+
+    const id = document.getElementById('search-id').value.trim();
+
+    if (!id) {
+
+        alert('please Enter post ID : ');
+
+        return;
+    }
+
+    const response = await fetch(`/api/posts/get-single-post/${id}`);
+
+    const data = await response.json();
+
+    if (response.ok) {
+
+        const post = data.post_data;
+
+        post_container.textContent = '';
+
+        const card = document.createElement('div');
+
+        const title = document.createElement('h3');
+
+        title.textContent = post.title;
+
+        const content = document.createElement('p');
+
+        content.textContent = post.content;
+
+        const edit_btn = document.createElement('button');
+
+        edit_btn.className = 'btn edit-btn';
+        edit_btn.textContent = 'Edit';
+        edit_btn.dataset.id = post._id;
+        edit_btn.dataset.title = post.title;
+        edit_btn.dataset.content = post.content;
+
+        const delete_btn = document.createElement('button');
+
+        delete_btn.className = 'btn delete-btn';
+        delete_btn.textContent = 'Delete';
+        delete_btn.dataset.id = post._id;
+
+        const actions = document.createElement('div');
+
+        actions.className = 'card-actions';
+        actions.appendChild(edit_btn);
+        actions.appendChild(delete_btn);
+
+        card.appendChild(title);
+        card.appendChild(content);
+        card.appendChild(actions);
+
+        post_container.appendChild(card);
+    }
+    else {
+
+        alert(data.message);
+    }
+});
