@@ -20,12 +20,10 @@ A modern, developer-first discovery platform designed to share, showcase, and ex
 Experience **DevShowcase** in action. All project media, demo recordings, and assets are housed in the [`assets/`](./assets/) directory.
 
 <div align="center">
-  <img src="./assets/demo.gif" alt="DevShowcase Full Walkthrough Demo" width="850px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);" />
-  <p><em>Demo Preview: Interactive developer feed, project showcases, profile management, and admin tools</em></p>
+  <img src="./assets/image_1.png" alt="DevShowcase Preview 1" width="850px" style="border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);" />
+  <img src="./assets/image_2.png" alt="DevShowcase Preview 2" width="850px" style="border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.5);" />
+  <p style="margin-top: 10px;"><em>DevShowcase Visual Preview: Community feed, project showcases, profile management, and admin tools</em></p>
 </div>
-
-> [!NOTE]
-> Add your recorded walkthrough animation as `demo.gif` inside the [`assets/`](./assets/) folder to render the preview banner above.
 
 ---
 
